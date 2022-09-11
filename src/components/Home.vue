@@ -1,11 +1,13 @@
 <template>
   <div>
-    <h1>hello</h1>
+    <h1>aa</h1>
   </div>
 </template>
 
 <script>
 export default {
-
+created(){
+  console.log("s")
+}
 };
 </script>

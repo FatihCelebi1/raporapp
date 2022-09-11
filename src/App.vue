@@ -1,24 +1,27 @@
 <template>
   <v-app>
+    <AppBar />
     <v-row no-gutters>
-      <v-col cols="6" md="4">
-        <navbar />
+      <v-col cols="3" md="2">
+        <SideBar />
       </v-col>
-      <v-col cols="12" sm="6" md="8">
-        <router-view/>
+      <v-col cols="12" sm="8" md="9">     
+        <router-view></router-view>
       </v-col>
     </v-row>
   </v-app>
 </template>
 
 <script>
-import navbar from "./components/navbar.vue";
+import SideBar from "./components/SideBar.vue";
+import AppBar from "./components/AppBar.vue";
 
 export default {
   name: "App",
 
   components: {
-    navbar,
+    SideBar,
+    AppBar,
   },
 
   data: () => ({

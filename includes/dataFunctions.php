@@ -16,6 +16,20 @@ class dataFunctions{
         return $data;
     
     }
+
+    public function findReports()
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $data = [];
+
+        $stmt = $dbConnect->prepare("SELECT * FROM `reports` ORDER BY `id` DESC");
+        if ($stmt->execute()) {
+            $data = $stmt->fetchAll();
+        }
+        return $data;
+    
+    }
 }
 
 ?>
