@@ -1,0 +1,21 @@
+data: () => ({
+     records: [],
+  }),
+  methods: {
+    getRecords() {
+      axios({
+        url: "http://localhost:8083/raporappv2/rapor-app/includes/users.php",
+        method: "get",
+      })
+        .then((res) => {
+          this.records = res.data.rows;
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.getRecords();
+  },
