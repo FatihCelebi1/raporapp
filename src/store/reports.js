@@ -7,14 +7,12 @@ const reports = {
 
   mutations: {
     SET_REPORTS(state, report) {
-      console.log("adım 3");
       state.report = report;
     },
   },
 
   getters: {
     getReport(state) {
-      console.log("adım 4");
       return state.report;
     },
   },
