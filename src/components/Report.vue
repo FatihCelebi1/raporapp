@@ -11,7 +11,7 @@
           </p>
         </v-col>
         <v-col cols="3" md="2">
-          <v-btn color="#038C3E" elevation="2" outlined
+          <v-btn color="#038C3E" elevation="2" dark
             >Ödeme Ekle<v-icon class="ml-2"
               >mdi-table-row-plus-after</v-icon
             ></v-btn
@@ -26,11 +26,59 @@
           hide-default-footer
           class="elevation-0 mt-5"
         ></v-data-table>
-        <v-btn color="#038C3E" elevation="2" class="mt-5" outlined
-          >Ödeme Ekle<v-icon class="ml-2"
-            >mdi-table-row-plus-after</v-icon
-          ></v-btn
-        >
+        <v-dialog transition="dialog-bottom-transition" max-width="600">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              color="#038C3E"
+              elevation="2"
+              class="mt-5"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              >Ödeme Ekle<v-icon class="ml-2"
+                >mdi-table-row-plus-after</v-icon
+              ></v-btn
+            >
+          </template>
+          <template v-slot:default="dialog">
+            <v-card>
+              <v-toolbar color="#038C3E" dark>Harcama Ekle</v-toolbar>
+              <v-card-text>
+                <div class="text-h2 pa-12">
+                  <v-text-field
+                    v-model="form.name"
+                    label="Madde"
+                    color="#038C3E"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="form.cash"
+                    label="Yapılan Ödeme"
+                    color="#038C3E"
+                    suffix="₺"
+                  ></v-text-field>
+                  <v-select
+                    v-model="form.account"
+                    :items="bankAccount"
+                    color="#038C3E"
+                    label="Hesap"
+                    required
+                  ></v-select>
+                  <v-text-field
+                    v-model="form.date"
+                    label="Tarih"
+                    color="#038C3E"
+                  ></v-text-field>
+                </div>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn @click="sendForm(form)">Ekle</v-btn>
+              </v-card-actions>
+              <v-card-actions class="justify-end">
+                <v-btn text @click="dialog.value = false">Kapat</v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
       </template>
     </v-container>
   </div>
@@ -41,10 +89,16 @@
 export default {
   data() {
     return {
+      form: {
+        name: "",
+        cash: "",
+        account: "",
+        date: "",
+      },
       records: [],
       headers: [
         {
-          text: "Sıra",
+          text: "Madde",
           align: "start",
           sortable: false,
           value: "madde",
@@ -53,35 +107,22 @@ export default {
         { text: "Hesap", value: "hesap" },
         { text: "Tarih", value: "tarih" },
       ],
+      bankAccount: ["Nakit", "Yapıkredi", "Enpara", "Akbank"],
     };
   },
-
   computed: {
     getRecords() {
-      console.log('admın 5')
-      return this.$store.getters['reports/getReport'] 
-    }
+      return this.$store.getters["reports/getReport"];
+    },
   },
-
-  // methods: {
-  // async getRecords() {
-  //   try {
-  // const { data } = await axios.get(
-  //   "http://localhost:8083/raporappv2/rapor-app/includes/reports.php"
-  // );
-
-  // this.records = data.rows;
-
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   },
-  // },
+  methods: {
+    async sendForm() {
+      console.log("report", this.form);
+      await this.$store.dispatch("reports/sendForm", this.form);
+    },
+  },
   async mounted() {
-    // commit => mutations
-    // dispatch => actions
-    console.log('adım 1')
-    await this.$store.dispatch('reports/fetchAllReports', 'ne istersem o');
+    await this.$store.dispatch("reports/fetchAllReports");
   },
 };
 </script>

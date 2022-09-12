@@ -29,6 +29,24 @@ const reports = {
         console.log(error);
       }
     },
+    async sendForm({ dispatch }, form) {
+      try {
+        const { data } = await axios.post(
+          "http://localhost:8083/raporappv2/rapor-app/includes/addreports.php",
+          form,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        dispatch("fetchAllReports");
+        console.log(data);
+        console.log("fatih", form);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 export default reports;

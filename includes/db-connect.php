@@ -1,5 +1,4 @@
 <?php
-
 class dbConnect
 {
     private $server = 'localhost';

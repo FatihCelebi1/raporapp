@@ -1,18 +1,25 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-
-
-Vue.use(VueRouter);
-
-import Fatih from "../components/Home.vue"
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from "../components/Home.vue"
 import Report from "../components/Report.vue"
 
-const router = new VueRouter({
-  mode: "history",
-  routes: [
-    { path: "/fatih", name:"fatih", compenent: Fatih},
-    { path: "/reports", name:"reports", component: Report }
-  ],
-});
+Vue.use(VueRouter)
 
-export default router;
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/reports',
+    name: 'reports',
+    component: Report
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router

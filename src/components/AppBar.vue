@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="#038C3E" >
+    <v-app-bar color="#fff" dark elevation="0">
       
       <v-toolbar-title><v-img src="../assets/logo.png"></v-img></v-toolbar-title>
           <v-spacer></v-spacer>

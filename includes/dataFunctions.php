@@ -30,6 +30,18 @@ class dataFunctions{
         return $data;
     
     }
+
+    public function addReports($name, $odeme, $hesap, $tarih)
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $stmt = $dbConnect->prepare("INSERT INTO `reports` (`madde`, `odeme`, `hesap`, `tarih`) VALUES ('$name', '$odeme', '$hesap', '$tarih')");
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return;
+        }
+    }
 }
 
 ?>

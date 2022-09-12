@@ -1,5 +1,6 @@
-<template>
-  <v-app>
+<template >
+<div id="app">
+  <v-app class="bg">
     <AppBar />
     <v-row no-gutters>
       <v-col cols="3" md="2">
@@ -10,6 +11,7 @@
       </v-col>
     </v-row>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -23,9 +25,10 @@ export default {
     SideBar,
     AppBar,
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>
+<style scoped>
+.bg{
+  background-color: #eff3f9 !important;
+}
+</style>
