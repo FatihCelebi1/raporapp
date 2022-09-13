@@ -24,14 +24,16 @@ const reports = {
         const { data } = await axios.get(
           "http://localhost:8083/raporappv2/rapor-app/includes/reports.php"
         );
+        
         commit("SET_REPORTS", data.rows);
+      
       } catch (error) {
         console.log(error);
       }
     },
     async sendForm({ dispatch }, form) {
       try {
-        const { data } = await axios.post(
+        await axios.post(
           "http://localhost:8083/raporappv2/rapor-app/includes/addreports.php",
           form,
           {
@@ -40,9 +42,9 @@ const reports = {
             },
           }
         );
+
         dispatch("fetchAllReports");
-        console.log(data);
-        console.log("fatih", form);
+      
       } catch (error) {
         console.log(error);
       }
