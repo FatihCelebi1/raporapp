@@ -25,8 +25,13 @@
           :items-per-page="-1"
           hide-default-footer
           class="elevation-0 mt-5"
-        ></v-data-table>
-        <v-dialog transition="dialog-bottom-transition" max-width="600">
+        >
+        </v-data-table>
+        <v-dialog
+          v-model="dialog"
+          transition="dialog-bottom-transition"
+          max-width="600"
+        >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               color="#038C3E"
@@ -71,9 +76,9 @@
                 </div>
               </v-card-text>
               <v-card-actions class="justify-end">
-                <v-btn @click="sendForm(form)">Ekle</v-btn>
-              </v-card-actions>
-              <v-card-actions class="justify-end">
+                <v-btn @click="sendForm(form)" color="#038C3E" outlined
+                  >Ekle</v-btn
+                >
                 <v-btn text @click="dialog.value = false">Kapat</v-btn>
               </v-card-actions>
             </v-card>
@@ -89,6 +94,8 @@
 export default {
   data() {
     return {
+      dialog: false,
+      dialogDelete: false,
       form: {
         name: "",
         cash: "",
@@ -117,8 +124,8 @@ export default {
   },
   methods: {
     async sendForm() {
-      console.log("report", this.form);
       await this.$store.dispatch("reports/sendForm", this.form);
+      this.dialog = false;
     },
   },
   async mounted() {

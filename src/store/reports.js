@@ -19,11 +19,12 @@ const reports = {
 
   actions: {
     async fetchAllReports({ commit }, data) {
-      console.log("data", data);
+      console.log("a", data);
       try {
         const { data } = await axios.get(
           "http://localhost:8083/raporappv2/rapor-app/includes/reports.php"
         );
+        
         commit("SET_REPORTS", data.rows);
       } catch (error) {
         console.log(error);
