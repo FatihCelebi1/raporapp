@@ -1,5 +1,4 @@
 <template>
-  <div>
     <v-container class="mt-5">
       <v-row no-gutters>
         <v-col cols="12" sm="6" md="10">
@@ -107,7 +106,6 @@
         </v-dialog>
       </template>
     </v-container>
-  </div>
 </template>
 
 <script>
