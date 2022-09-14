@@ -42,6 +42,28 @@ class dataFunctions{
             return;
         }
     }
+    public function updateReports($name, $odeme, $hesap, $tarih, $id)
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $stmt = $dbConnect->prepare("update reports set name='$name', cash='$odeme', account='$hesap', date='$tarih' where id='$id'");
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return;
+        }
+    }
+    public function deletReports($id)
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $stmt = $dbConnect->prepare("delete from reports where id='$id'");
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return;
+        }
+    }
 }
 
 ?>

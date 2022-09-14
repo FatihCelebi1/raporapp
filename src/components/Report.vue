@@ -11,7 +11,13 @@
           </p>
         </v-col>
         <v-col cols="3" md="2">
-          <v-btn color="#038C3E" elevation="2" dark
+          <v-btn
+            color="#038C3E"
+            elevation="2"
+            class="mt-5"
+            dark
+            @click="addRecordButton()"
+            :loading="loading"
             >Ödeme Ekle<v-icon class="ml-2"
               >mdi-table-row-plus-after</v-icon
             ></v-btn
@@ -20,13 +26,15 @@
       </v-row>
       <template>
         <v-data-table
+          :loading="getLoading"
           :headers="headers"
           :items="getRecords"
           :items-per-page="-1"
-          hide-default-footer
+          loading-text="Harcamalar Yükleniyor"
+          no-data-text="Harcama Bulunmadı"
           class="elevation-0 mt-5"
         >
-          <template v-slot:item.actions="{ item }">
+          <template v-slot:[`item.actions`]="{ item }">
             <v-icon small class="mr-2" @click="editItem(item)">
               mdi-pencil
             </v-icon>
@@ -47,7 +55,7 @@
               @click="addRecordButton()"
               v-bind="attrs"
               v-on="on"
-              
+              :loading="loading"
               >Ödeme Ekle<v-icon class="ml-2"
                 >mdi-table-row-plus-after</v-icon
               ></v-btn
@@ -89,6 +97,7 @@
                   color="#038C3E"
                   outlined
                   class="customButtom"
+                  :loading="loading"
                   >{{ buttonText }}</v-btn
                 >
                 <v-btn text @click="dialog.value = false">Kapat</v-btn>
@@ -109,6 +118,7 @@ export default {
       dialog: false,
       dialogDelete: false,
       buttonText: "Ekle",
+      loading: false,
       form: {
         name: "",
         cash: "",
@@ -135,12 +145,20 @@ export default {
     getRecords() {
       return this.$store.getters["reports/getReport"];
     },
+    getLoading() {
+      return this.$store.getters["reports/getLoading"];
+    },
   },
   methods: {
     async sendForm() {
-     
-      await this.$store.dispatch("reports/sendForm", this.form);
-      this.dialog = false;
+      if (this.form.id) {
+        (this.loading = true),
+          await this.$store.dispatch("reports/updateForm", this.form);
+        (this.loading = false), (this.dialog = false);
+      } else {
+        await this.$store.dispatch("reports/sendForm", this.form);
+        this.dialog = false;
+      }
     },
 
     editItem(item) {
@@ -149,10 +167,14 @@ export default {
       this.form = Object.assign({}, item);
       this.dialog = true;
     },
-    addRecordButton(){
-        this.form = Object.assign({}, this.getRecords);
-        this.buttonText = "Ekle";
-    }
+    async deleteItem(item) {
+      await this.$store.dispatch("reports/deleteForm", item);
+    },
+    addRecordButton() {
+      this.dialog = true;
+      this.form = Object.assign({}, this.getRecords);
+      this.buttonText = "Ekle";
+    },
   },
   async mounted() {
     await this.$store.dispatch("reports/fetchAllReports");
