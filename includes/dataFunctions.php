@@ -35,7 +35,7 @@ class dataFunctions{
     {
         $dbClass = new dbConnect();
         $dbConnect = $dbClass->dbConnect();
-        $stmt = $dbConnect->prepare("INSERT INTO `reports` (`madde`, `odeme`, `hesap`, `tarih`) VALUES ('$name', '$odeme', '$hesap', '$tarih')");
+        $stmt = $dbConnect->prepare("INSERT INTO `reports` (`name`, `cash`, `account`, `date`) VALUES ('$name', '$odeme', '$hesap', '$tarih')");
         if ($stmt->execute()) {
             return true;
         } else {

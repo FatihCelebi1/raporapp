@@ -26,6 +26,12 @@
           hide-default-footer
           class="elevation-0 mt-5"
         >
+          <template v-slot:item.actions="{ item }">
+            <v-icon small class="mr-2" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          </template>
         </v-data-table>
         <v-dialog
           v-model="dialog"
@@ -38,8 +44,10 @@
               elevation="2"
               class="mt-5"
               dark
+              @click="addRecordButton()"
               v-bind="attrs"
               v-on="on"
+              
               >Ödeme Ekle<v-icon class="ml-2"
                 >mdi-table-row-plus-after</v-icon
               ></v-btn
@@ -76,8 +84,12 @@
                 </div>
               </v-card-text>
               <v-card-actions class="justify-end">
-                <v-btn @click="sendForm(form)" color="#038C3E" outlined
-                  >Ekle</v-btn
+                <v-btn
+                  @click="sendForm(form)"
+                  color="#038C3E"
+                  outlined
+                  class="customButtom"
+                  >{{ buttonText }}</v-btn
                 >
                 <v-btn text @click="dialog.value = false">Kapat</v-btn>
               </v-card-actions>
@@ -96,6 +108,7 @@ export default {
     return {
       dialog: false,
       dialogDelete: false,
+      buttonText: "Ekle",
       form: {
         name: "",
         cash: "",
@@ -108,11 +121,12 @@ export default {
           text: "Madde",
           align: "start",
           sortable: false,
-          value: "madde",
+          value: "name",
         },
-        { text: "Harcanan Ödeme", value: "odeme" },
-        { text: "Hesap", value: "hesap" },
-        { text: "Tarih", value: "tarih" },
+        { text: "Harcanan Ödeme", value: "cash" },
+        { text: "Hesap", value: "account" },
+        { text: "Tarih", value: "date" },
+        { text: "Aksiyonlar", value: "actions", sortable: false },
       ],
       bankAccount: ["Nakit", "Yapıkredi", "Enpara", "Akbank"],
     };
@@ -124,12 +138,29 @@ export default {
   },
   methods: {
     async sendForm() {
+     
       await this.$store.dispatch("reports/sendForm", this.form);
       this.dialog = false;
     },
+
+    editItem(item) {
+      console.log(item.id);
+      this.buttonText = "Ödemeyi Güncelle";
+      this.form = Object.assign({}, item);
+      this.dialog = true;
+    },
+    addRecordButton(){
+        this.form = Object.assign({}, this.getRecords);
+        this.buttonText = "Ekle";
+    }
   },
   async mounted() {
     await this.$store.dispatch("reports/fetchAllReports");
   },
 };
 </script>
+<style scoped>
+.customButtom {
+  text-transform: unset !important;
+}
+</style>
