@@ -11,12 +11,14 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    v-model="login.name"
                     prepend-icon="mdi-account"
                     name="login"
                     label="Kullanıcı Adı"
                     type="text"
                   ></v-text-field>
                   <v-text-field
+                    v-model="login.password"
                     id="password"
                     prepend-icon="mdi-lock"
                     name="password"
@@ -27,14 +29,14 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                    <v-btn
-            color="#038C3E"
-            elevation="2"
-            class="mt-5"
-            dark
-            >Giriş Yap<v-icon class="ml-2"
-              >mdi-login</v-icon
-            ></v-btn>
+                <v-btn
+                  @click="sendLogin(login)"
+                  color="#038C3E"
+                  elevation="2"
+                  class="mt-5"
+                  dark
+                  >Giriş Yap<v-icon class="ml-2">mdi-login</v-icon></v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -43,3 +45,21 @@
     </v-content>
   </v-app>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      login: {
+        name: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async sendLogin() {
+      await this.$store.dispatch("login/sendLogin", this.login);
+     
+    },
+  },
+};
+</script>

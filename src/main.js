@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.min.css'
 import store from './store'
 import router from './router'
 
+
 Vue.config.productionTip = false
 
 new Vue({

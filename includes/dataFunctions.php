@@ -64,6 +64,18 @@ class dataFunctions{
             return;
         }
     }
+    public function loginSuccess($name, $pass)
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $stmt = $dbConnect->prepare("select * from users where kullanici_adi='$name' and sifre='$pass'");
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return;
+        }
+      
+    }
 }
 
 ?>
