@@ -1,5 +1,9 @@
 <template >
-<div id="app">
+<div id="app" >
+  <div v-if="test == 'a'">
+   <LoginPage />
+  </div>
+   <div v-else>
   <v-app class="bg">
     <AppBar />
     <v-row no-gutters>
@@ -12,19 +16,25 @@
     </v-row>
   </v-app>
   </div>
+  </div>
 </template>
 
 <script>
 import SideBar from "./components/SideBar.vue";
 import AppBar from "./components/AppBar.vue";
+import LoginPage from "./views/LoginPage.vue";
 
 export default {
   name: "App",
-
   components: {
     SideBar,
     AppBar,
+    LoginPage,
   },
+    data() {
+    return {
+      test: 'a'
+    }}
 };
 </script>
 <style scoped>
