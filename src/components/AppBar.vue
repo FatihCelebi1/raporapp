@@ -19,7 +19,7 @@
               >Profil</v-list-item-title
             >
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="sendLogout()">
             <v-list-item-title
               ><v-icon class="mr-1">mdi-logout-variant</v-icon>Çıkış
               Yap</v-list-item-title
@@ -36,5 +36,11 @@ export default {
     drawer: false,
     group: null,
   }),
+    methods: {
+    async sendLogout() {
+      await this.$store.dispatch("login/logout");
+     
+    },
+  },
 };
 </script>

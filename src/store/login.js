@@ -1,5 +1,5 @@
 const axios = require("axios");
-import router from '../router'
+// import router from '../router'
 import Cookies from "js-cookie";
 
 export default {
@@ -33,8 +33,13 @@ export default {
           commit("SET_USER", response.data.accessUser);
           Cookies.set("accessUser", JSON.stringify(response.data.accessUser));
           Cookies.set("accessToken", response.data.token);
-          router.push("/");
+          window.location.reload()
         });
     },
+    async logout() {
+      Cookies.remove("accessUser");
+      Cookies.remove("accessToken");
+      window.location.reload()
   },
+}
 };
