@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <div>
       <v-app class="bg">
         <AppBar />
-        <v-row no-gutters>
+        <v-row>
           <v-col cols="3" md="2">
             <SideBar />
           </v-col>
@@ -11,8 +10,15 @@
             <router-view></router-view>
           </v-col>
         </v-row>
+         <v-footer dark padless>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>RaporApp</strong>
+    </v-col>
+  </v-footer>
       </v-app>
-    </div>
   </div>
 </template>
 

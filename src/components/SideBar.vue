@@ -21,8 +21,9 @@ export default {
     return {
       items: [
         { title: "Ana Sayfa", icon: "mdi-view-dashboard", link: "/" },
-        { title: "Raporlar", icon: "mdi-account-box", link: "/reports" },
-        { title: "Admin", icon: "mdi-gavel", link: "/fatih" },
+        { title: "Profilim", icon: "mdi-account", link: "/profile" },
+        { title: "Harcamalarım", icon: "mdi-format-list-checks", link: "/reports" },
+        
       ],
     };
   },

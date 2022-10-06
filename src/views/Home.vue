@@ -80,27 +80,37 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-timeline>
-          <v-timeline-item
-            v-for="(record, i) in getRecords"
-            :key="i"
-            color="#038C3E"
-            small
-          >
-            <template v-slot:opposite>
-              <span class="font-weight-bold" v-text="record.date"></span>
-            </template>
-            <div>
-              <h4>
-                {{ record.name }}
-              </h4>
-              <p>
-                {{ record.date }} tarihinde {{ record.name }} maddesine {{record.account}} ile
-                {{ record.cash }} ₺ harcama yapıldı.
-              </p>
-            </div>
-          </v-timeline-item>
-        </v-timeline>
+        <h4>Son Harcamalar</h4>
+        <template v-if="!getRecords.length">
+          <p>
+            Her hangi bir harcamınız yok.
+            <router-link to="/reports">Buraya</router-link> tıklayarak
+            harcamalarını ekleyebilirsiniz
+          </p>
+        </template>
+        <template v-else>
+          <v-timeline>
+            <v-timeline-item
+              v-for="(record, i) in getRecords"
+              :key="i"
+              color="#038C3E"
+              small
+            >
+              <template v-slot:opposite>
+                <span class="font-weight-bold" v-text="record.date"></span>
+              </template>
+              <div>
+                <h4>
+                  {{ record.name }}
+                </h4>
+                <p>
+                  {{ record.date }} tarihinde {{ record.name }} maddesine
+                  {{ record.account }} ile {{ record.cash }} ₺ harcama yapıldı.
+                </p>
+              </div>
+            </v-timeline-item>
+          </v-timeline>
+        </template>
       </v-col>
     </v-row>
   </v-container>
