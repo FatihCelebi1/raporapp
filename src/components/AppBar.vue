@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie";
 export default {
   data: () => ({
     drawer: false,
@@ -42,5 +43,10 @@ export default {
      
     },
   },
+      created() {
+        const user = JSON.parse(Cookies.get("accessUser"));
+        console.log(user)
+        // this.username = `${user.firstName} ${user.lastName}`;
+    },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="isLogin">
+    <div>
       <v-app class="bg">
         <AppBar />
         <v-row no-gutters>
@@ -13,30 +13,20 @@
         </v-row>
       </v-app>
     </div>
-    <div v-else>
-     <Login />
-      </div>
   </div>
 </template>
 
 <script>
-import Cookies from "js-cookie";
 import SideBar from "./components/SideBar.vue";
 import AppBar from "./components/AppBar.vue";
-import Login from "./views/LoginPage.vue";
+
 
 export default {
-  data() {
-    return {
-      isLogin: Cookies.get("accessToken"),
-    };
-  },
 
   name: "App",
   components: {
     SideBar,
     AppBar,
-    Login,
   },
 };
 </script>
