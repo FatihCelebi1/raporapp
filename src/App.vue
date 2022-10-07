@@ -1,7 +1,6 @@
 <template>
   <div id="app">
       <v-app class="bg">
-        <AppBar />
         <v-row>
           <v-col cols="3" md="2">
             <SideBar />
@@ -24,7 +23,6 @@
 
 <script>
 import SideBar from "./components/SideBar.vue";
-import AppBar from "./components/AppBar.vue";
 
 
 export default {
@@ -32,12 +30,11 @@ export default {
   name: "App",
   components: {
     SideBar,
-    AppBar,
   },
 };
 </script>
 <style scoped>
 .bg {
-  background-color: #eff3f9 !important;
+  background-color: #f5f5fb !important;
 }
 </style>
