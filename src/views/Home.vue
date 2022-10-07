@@ -50,7 +50,7 @@
         <template v-else>
           <v-timeline class="ma-8">
             <v-timeline-item
-              v-for="(record, i) in getRecords.slice(0, 5)"
+              v-for="(record, i) in getRecords.slice(0, 3)"
               :key="i"
               color="#038C3E"
               small
