@@ -2,7 +2,7 @@
   <v-navigation-drawer left color="#fefefe" class="sidebar-item" hide-overlay>
     <v-img src="https://gurmewoo.com/wp-content/uploads/2022/10/Bir-baslik-ekleyin.svg" class="ma-5 mb-10"></v-img>
     <v-list v-for="item in items" :key="item.title" class="list" link>
-      <v-list-item-group v-model="selectedItem" color="#038c3e">
+      <v-list-item-group color="#038c3e">
         <v-list-item :to="item.link" class="ml-2 mr-2" dense>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>

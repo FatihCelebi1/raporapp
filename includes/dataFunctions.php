@@ -31,6 +31,20 @@ class dataFunctions{
     
     }
 
+    public function findDatas()
+    {
+        $dbClass = new dbConnect();
+        $dbConnect = $dbClass->dbConnect();
+        $data = [];
+
+        $stmt = $dbConnect->prepare("SELECT * FROM `profiles`");
+        if ($stmt->execute()) {
+            $data = $stmt->fetchAll();
+        }
+        return $data;
+    
+    }
+
     public function addReports($name, $odeme, $hesap, $tarih)
     {
         $dbClass = new dbConnect();
